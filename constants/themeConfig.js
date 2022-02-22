@@ -24,7 +24,7 @@ export const darkTheme = {
   grey2: "#2E2E2E",
   grey3: "#3E3D40",
   grey4: "#69676B",
-  grey5: "#F2F2F2",
+  grey5: "#D9D9D9",
   grey6: "#FFFFFF",
 };
 
