@@ -1,21 +1,14 @@
 import styled from "styled-components";
 
-export const NoteHL = styled.div`
-  width: 100%;
-  height: 0.3rem;
-  background-color: var(--four);
-`;
 
-export const NoteVL = styled.div`
-  width: 0.3rem;
-  height: 90%;
-  background-color: var(--four);
-`;
 
-export const NotesContainer = styled.div`
+export const AppContainer = styled.div`
   width: 375px;
-  height: 525px;
+  height: 100%;
   background-color: black;
+
+  display: flex;
+  flex-direction: column;
 `;
 
 export const NoteHeaderContainer = styled.div`

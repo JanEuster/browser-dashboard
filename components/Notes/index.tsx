@@ -1,28 +1,20 @@
 import React, { useEffect, useRef, useState } from "react";
 import {
-  NotesContainer,
+  AppContainer,
   NoteHeaderTitle,
   NoteTitle,
   NoteContent,
   NoteHeaderContainer,
   NotePreviewListContainer,
   NotePreviewContainer,
-  NoteHL,
-  NoteVL,
   Icon,
   NoteContentContainer,
   NoteEditableTitle,
 } from "./notes.styles";
 import { INote } from "../../types";
 import { Plus, Notepad, Note as NoteIcon, X, Trash } from "phosphor-react";
+import { HL, VL } from "../Globals";
 
-const useComponentDidMount = () => {
-  const ref = useRef<Boolean>();
-  useEffect(() => {
-    ref.current = true;
-  }, []);
-  return ref.current;
-};
 
 const NotePreview: React.FC<{ title: string; setNoteView: Function }> = (
   props
@@ -30,7 +22,7 @@ const NotePreview: React.FC<{ title: string; setNoteView: Function }> = (
   return (
     <NotePreviewContainer onClick={() => props.setNoteView()}>
       <NoteIcon size={38} weight="bold" />
-      <NoteVL />
+      <VL />
       <NoteTitle>{props.title}</NoteTitle>
     </NotePreviewContainer>
   );
@@ -138,8 +130,8 @@ const NotesApp: React.FC<{}> = (props) => {
   }, [notes]);
 
   return (
-    <NotesContainer>
-      <div>
+    <AppContainer>
+          
         <NoteHeaderContainer>
           {noteView ? (
             <>
@@ -150,7 +142,7 @@ const NotesApp: React.FC<{}> = (props) => {
                 placeholder="New Note"
                 value={noteView.title}
                 onChange={(e) => changeTitle(e.target.value)}
-              />
+                />
               <Icon onClick={() => closeNote()}>
                 <X size={40} weight="bold" />
               </Icon>
@@ -168,34 +160,32 @@ const NotesApp: React.FC<{}> = (props) => {
             </>
           )}
         </NoteHeaderContainer>
-        <NoteHL />
-      </div>
 
+        <HL />
+        
       {noteView ? (
         <NoteView
-          content={noteView.content}
-          setContent={(e: React.ChangeEvent<HTMLInputElement>) =>
-            changeContent(e.target.value)
-          }
+        content={noteView.content}
+        setContent={(e: React.ChangeEvent<HTMLInputElement>) =>
+          changeContent(e.target.value)
+        }
         />
       ) : (
-        <>
-          <NotePreviewListContainer>
+        <NotePreviewListContainer>
             {notes !== undefined &&
               notes.map((note, i) => {
                 return (
                   <NotePreview
-                    key={i}
-                    title={note.title}
-                    setNoteView={() => setNoteView(note)}
+                  key={i}
+                  title={note.title}
+                  setNoteView={() => setNoteView(note)}
                   />
-                );
-              })}
+                  );
+                })}
           </NotePreviewListContainer>
-          <NoteHL />
-        </>
       )}
-    </NotesContainer>
+      <HL />
+    </AppContainer>
   );
 };
 
