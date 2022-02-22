@@ -13,8 +13,8 @@ export const NoteVL = styled.div`
 `;
 
 export const NotesContainer = styled.div`
-  width: 400px;
-  height: 600px;
+  width: 375px;
+  height: 525px;
   background-color: black;
 `;
 
