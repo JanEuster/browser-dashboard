@@ -32,10 +32,9 @@ export const LinksContainer = styled.div`
   overflow: scroll;
 `
 
-export const LinkLink = styled.div`
+export const LinkCard = styled.div`
   width: 93%;
-  height: 100%;
-  max-height: 45px;
+  height: 45px;
   background-color: var(--three);
   border-radius: 15px;
   display: flex;
@@ -43,13 +42,18 @@ export const LinkLink = styled.div`
   position: relative;
   margin: 0.2rem 0;
   overflow: hidden;
+
+  &:hover {
+    background-color: var(--two);
+  }
 `
 
-export const LinkImage = styled.img`
+export const Favicon = styled.img`
   background-color: var(--zero);
   height: 100%;
   aspect-ratio: 1;
   border-radius: 15px 0 0 15px;
+  // transform: scale(0.9);
   border: 2px solid var(--four);
 `
 

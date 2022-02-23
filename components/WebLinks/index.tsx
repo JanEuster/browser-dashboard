@@ -1,19 +1,23 @@
 import { HL, HStack, VL, VStack } from "../Globals";
-import { AppContainer, Header, HeaderTitle, LinkLink, LinksContainer, LinkImage, LinkTitle } from "./weblinks.styles";
+import { AppContainer, Header, HeaderTitle, LinkCard, LinksContainer, Favicon, LinkTitle } from "./weblinks.styles";
 import globalStyles from "../../styles/Home.module.css";
 import Link from "next/link";
 
 const LinkItem: React.FC<{title: string, src: string}> = ({title, src}) => {
   return (
-      <Link href={src}>
-        <a className={globalStyles.link}>
-    <LinkLink>
-            <LinkImage src="https://avatars.githubusercontent.com/u/70290323?s=120&v=4"/>
-            <LinkTitle>{title}</LinkTitle>            
-    </LinkLink>
-        </a>
-      </Link>
-    )
+    <Link href={src}>
+      <a className={globalStyles.link}>
+        <LinkCard>
+          <Favicon
+            src={
+              `https://t1.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${src}&size=48`
+            }
+          />
+          <LinkTitle>{title}</LinkTitle>
+        </LinkCard>
+      </a>
+    </Link>
+  );
 }
 
 const WebLinks: React.FC<{}> = () => {
