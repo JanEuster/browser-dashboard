@@ -1,12 +1,5 @@
 import styled from "styled-components"
 
-export const AppContainer = styled.div`
-  width: 175px;
-  height: 100%;
-  background-color: black;
-  display: flex;
-  flex-direction: column;
-`;
 
 export const Header = styled.div`
   height: 2rem;
@@ -34,7 +27,9 @@ export const LinksContainer = styled.div`
 
 export const LinkCard = styled.div`
   width: 93%;
-  height: 45px;
+  min-height: 2rem;
+  height: 5vh;
+  max-height: 3.5rem;
   background-color: var(--three);
   border-radius: 15px;
   display: flex;

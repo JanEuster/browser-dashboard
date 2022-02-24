@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import React from "react";
-import { HStack, VStack, HStack100, VStack100 } from "../components/Globals";
+import { AppContainer, AppContainerV, SpacerV, SpacerH, HStack, VStack, HStack100, VStack100 } from "../components/Globals";
 import NotesApp from "../components/Notes";
 import WebLinks from "../components/WebLinks";
 import styles from "../styles/Home.module.css";
@@ -21,8 +21,19 @@ const Home: NextPage<HomeProps> = ({ theme }) => {
       <main className={styles.main}>
         <VStack100>
           <HStack100>
-            <NotesApp />
-            <WebLinks />
+            <VStack width="375px">
+              <NotesApp />
+                <SpacerV />
+              <AppContainerV />
+            </VStack>
+              <SpacerH />
+            <VStack width="200px">
+              <WebLinks />
+                <SpacerV />
+              <AppContainerV />
+            </VStack>
+              <SpacerH />
+            <AppContainer />
           </HStack100>
         </VStack100>
       </main>

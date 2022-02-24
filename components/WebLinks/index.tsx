@@ -1,5 +1,5 @@
-import { HL, HStack, VL, VStack } from "../Globals";
-import { AppContainer, Header, HeaderTitle, LinkCard, LinksContainer, Favicon, LinkTitle } from "./weblinks.styles";
+import { AppContainerV, HL, HStack, VL, VStack } from "../Globals";
+import { Header, HeaderTitle, LinkCard, LinksContainer, Favicon, LinkTitle } from "./weblinks.styles";
 import globalStyles from "../../styles/Home.module.css";
 import Link from "next/link";
 
@@ -20,13 +20,12 @@ const LinkItem: React.FC<{title: string, src: string}> = ({title, src}) => {
   );
 }
 
-const WebLinks: React.FC<{}> = () => {
+const WebLinks: React.FC<{width: string}> = ({width}) => {
   return (
-    <AppContainer>
+    <AppContainerV width={width}>
       <Header>
         <HeaderTitle>Links</HeaderTitle>
       </Header>
-      <VStack >
         <HL />
         <LinksContainer className={globalStyles.noScrollbar}>
           <LinkItem title="DuckDuckGo" src="https://www.duckduckgo.com/"/>
@@ -37,8 +36,7 @@ const WebLinks: React.FC<{}> = () => {
           <LinkItem title="Blender" src="https://www.blender.org/"/>
         </LinksContainer>
         <HL />
-      </VStack>
-    </AppContainer>
+    </AppContainerV>
   )
 }
 

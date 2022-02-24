@@ -1,16 +1,6 @@
 import styled from "styled-components";
 
 
-
-export const AppContainer = styled.div`
-  width: 375px;
-  height: 100%;
-  background-color: black;
-
-  display: flex;
-  flex-direction: column;
-`;
-
 export const NoteHeaderContainer = styled.div`
   background-color: var(--one);
   width: 100%;
@@ -105,7 +95,7 @@ export const NoteContent = styled.textarea`
     width: 10px;
     cursor: pointer;
   }
-::-webkit-scrollbar-thumb:hover {
+  &::-webkit-scrollbar-thumb:hover {
   background: var(--four);
   cursor: pointer;
 }
@@ -122,6 +112,7 @@ export const NoteContent = styled.textarea`
 
 export const Icon = styled.div`
   background-color: var(--two);
+  border: 0.15rem solid var(--two);
   color: var(--five);
   height: 70%;
   aspect-ratio: 1;
