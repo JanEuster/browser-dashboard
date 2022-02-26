@@ -1,14 +1,28 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
-import React from "react";
+import { useRouter } from "next/router";
+import React, { useEffect } from "react";
 import { AppContainer, AppContainerVH, SpacerV, SpacerH, HStack, VStack, HStack100, VStack100 } from "../components/common";
-import Dashboard, { NotesApp, WeatherSummaryApp, WebLinksApp } from "../components/Dashboard";
+import Dashboard from "../components/Dashboard";
 import styles from "../styles/Home.module.css";
 import { HomeProps } from "../types";
 import ThemeButton from "./../components/ThemeButton/index";
 
 const Home: NextPage<> = ({ theme, currentWeather }) => {
+  const router = useRouter();
+
+
+  useEffect(() => {
+    // function to refresh the server-side rendered props 
+    const refreshData = () => {
+      router.replace(router.asPath);
+    }
+    const refreshInterval = setInterval(refreshData, 60 * 1000);
+
+    return () => clearInterval(refreshInterval)
+  }, [])
+
   return (
     <div className={styles.container}>
       <Head>
