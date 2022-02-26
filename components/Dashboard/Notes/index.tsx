@@ -10,9 +10,9 @@ import {
   NoteContentContainer,
   NoteEditableTitle,
 } from "./notes.styles";
-import { IFlex, INote } from "../../types";
+import { IFlex, INote } from "../../../types";
 import { Plus, Notepad, Note as NoteIcon, X, Trash } from "phosphor-react";
-import { AppContainerVH, HL, VL } from "../common";
+import { AppContainerVH, HL, VL } from "../../common";
 
 
 const NotePreview: React.FC<{ title: string; setNoteView: Function }> = (

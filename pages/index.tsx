@@ -3,8 +3,7 @@ import Head from "next/head";
 import Image from "next/image";
 import React from "react";
 import { AppContainer, AppContainerVH, SpacerV, SpacerH, HStack, VStack, HStack100, VStack100 } from "../components/common";
-import NotesApp from "../components/Notes";
-import WebLinks from "../components/WebLinks";
+import { NotesApp, WebLinksApp } from "../components/Dashboard";
 import styles from "../styles/Home.module.css";
 import { HomeProps } from "../types";
 import ThemeButton from "./../components/ThemeButton/index";
@@ -30,7 +29,7 @@ const Home: NextPage<HomeProps> = ({ theme }) => {
              <SpacerH />
 
             <VStack width="200px" shrink={0} >
-              <WebLinks />
+              <WebLinksApp />
               <SpacerV />
               <AppContainerVH />
             </VStack>

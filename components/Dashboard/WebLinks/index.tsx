@@ -1,6 +1,6 @@
-import { AppContainerVH, HL, HStack, VL, VStack } from "../common";
+import { AppContainerVH, HL, HStack, VL, VStack } from "../../common";
 import { Header, HeaderTitle, LinkCard, LinksContainer, Favicon, LinkTitle } from "./weblinks.styles";
-import globalStyles from "../../styles/Home.module.css";
+import globalStyles from "../../../styles/Home.module.css";
 import Link from "next/link";
 
 const LinkItem: React.FC<{title: string, src: string}> = ({title, src}) => {
@@ -20,7 +20,7 @@ const LinkItem: React.FC<{title: string, src: string}> = ({title, src}) => {
   );
 }
 
-const WebLinks: React.FC<{shrink?: number}> = ({shrink}) => {
+const WebLinksApp: React.FC<{shrink?: number}> = ({shrink}) => {
   return (
     <AppContainerVH shrink={shrink}>
       <Header>
@@ -40,4 +40,4 @@ const WebLinks: React.FC<{shrink?: number}> = ({shrink}) => {
   )
 }
 
-export default WebLinks;
+export default WebLinksApp;
