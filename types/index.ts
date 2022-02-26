@@ -17,28 +17,6 @@ export interface INote {
 }
 
 export interface IFlex {
-  basis?: number; 
-  shrink?: number; 
-  grow?: number;
-}
-
-export interface IFlexW {
-  width: string;
-  basis?: number;
-  shrink?: number;
-  grow?: number;
-}
-
-export interface IFlexH {
-  height: string;
-  basis?: number;
-  shrink?: number;
-  grow?: number;
-}
-
-export interface IFlexWH {
-  width?: number;
-  height?: number;
   basis?: number;
   shrink?: number;
   grow?: number;

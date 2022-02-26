@@ -2,16 +2,16 @@ import styled from "styled-components";
 import globalStyles from "../../styles/home.module.css";
 import { IFlex, IFlexH, IFlexW, IFlexWH } from "../../types";
 
-export const HL = styled.div<{scale?: number}>`
-  width: 100%;
-  height: ${props => props.scale ? props.scale*0.3 : 0.3}rem;
-  background-color: var(--four);
+export const HL = styled.div<{ scale?: number, length?: number, backgroundColor?: string }>`
+  width: ${props => props.length ? props.length : 100}%;
+  height: ${props => props.scale ? props.scale * 0.3 : 0.3}rem;
+  background-color: ${props => props.backgroundColor ? props.backgroundColor : "var(--four)"};
 `;
 
-export const VL = styled.div<{scale?: number}>`
-  width: ${props => props.scale ? props.scale*0.3 : 0.3}rem;
-  height: 100%;
-  background-color: var(--four);
+export const VL = styled.div<{ scale?: number, length?: number, backgroundColor?: string }>`
+  width: ${props => props.scale ? props.scale * 0.3 : 0.3}rem;
+  height: ${props => props.length ? props.length : 100}%;
+  background-color: ${props => props.backgroundColor ? props.backgroundColor : "var(--four)"};
 `;
 
 export const HStack100 = styled.div`
@@ -48,8 +48,11 @@ export const VStack100 = styled.div`
 `
 
 
-
-export const HStack = styled.div <IFlexH>`
+interface IStack extends IFlex {
+  width?: string;
+  height?: string;
+}
+export const HStack = styled.div <IStack>`
   width: 100%;
   height: ${(props) => props.height};
   ${(props) => props.basis !== undefined ? `flex-basis: ${props.basis}%;` : null}
@@ -67,7 +70,7 @@ export const HStack = styled.div <IFlexH>`
  ; }
 `
 
-export const VStack = styled.div<IFlexW>`
+export const VStack = styled.div<IStack>`
   width: ${props => props.width};
   height: 100%;
   ${(props) => props.basis !== undefined ? `flex-basis: ${props.basis}%;` : null}
@@ -86,7 +89,12 @@ export const VStack = styled.div<IFlexW>`
   }
 `
 
-export const AppContainer = styled.div<IFlexWH>`
+interface IContainer extends IFlex {
+  width?: number;
+  height?: number;
+  backgroundColor?: string;
+}
+export const AppContainer = styled.div<IContainer>`
   width: ${props => props.width !== undefined ? `${props.width}px` : "100%"};
   height: ${props => props.height !== undefined ? `${props.height}px` : "100%"};
   // min-width: 150px;
@@ -95,15 +103,16 @@ export const AppContainer = styled.div<IFlexWH>`
   ${(props) => props.shrink !== undefined ? `flex-shrink: ${props.shrink};` : null}
   ${(props) => props.grow !== undefined ? `flex-grow: ${props.grow};` : null}
 
-  background-color: var(--zero);
-  // min-height: 250px;
-  background-color: black;
+  background-color: ${props => props.backgroundColor ? props.backgroundColor : "var(--zero)"};
 
   display: flex;
   flex-direction: column;
 `;
 
-export const AppContainerVH = styled.div<IFlex>`
+interface IContainerVH extends IFlex {
+  backgroundColor?: string;
+}
+export const AppContainerVH = styled.div<IContainerVH>`
   width: 100%;
   height: 100%;
   // min-width: 150px;
@@ -111,9 +120,7 @@ export const AppContainerVH = styled.div<IFlex>`
   ${(props) => props.basis !== undefined ? `flex-basis: ${props.basis}%;` : null}
   ${(props) => props.shrink !== undefined ? `flex-shrink: ${props.shrink};` : null}
   ${(props) => props.grow !== undefined ? `flex-grow: ${props.grow};` : null}
-  background-color: var(--zero);
-  // min-height: 250px;
-  background-color: black;
+  background-color: ${props => props.backgroundColor ? props.backgroundColor : "var(--zero)"};
 
   display: flex;
   flex-direction: column;
@@ -122,12 +129,21 @@ export const AppContainerVH = styled.div<IFlex>`
 
 export const SpacerV = styled.hr`
   width: 100%;
-  min-height: 5px;
+  min-height: 10px;
   height: 20px;
-`
+`;
 
 export const SpacerH = styled.hr`
-  min-width: 5px;
+  min-width: 10px;
   width: 20px;
   height: 100%;
+`;
+
+export const CustomIcon = styled.div<{ size: number }>`
+  width: ${props => props.size}px;
+  height: ${props => props.size}px;
+`;
+
+export const Rotate = styled.span<{ r: number }>`
+  transform: rotate(${props => props.r}deg);
 `
