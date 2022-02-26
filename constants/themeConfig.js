@@ -8,7 +8,7 @@ export const lightTheme = {
   grey0: "#FFFFFF",
   grey1: "#F2F2F2",
   grey2: "#DBDBDB",
-  grey3: "#C2BEC4",
+  grey3: "#CFCBD1",
   grey4: "#363537",
   grey5: "#212121",
   grey6: "#000000",

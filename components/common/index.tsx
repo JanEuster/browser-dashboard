@@ -6,13 +6,19 @@ export const HL = styled.div<{ scale?: number, length?: number, backgroundColor?
   width: ${props => props.length ? props.length : 100}%;
   height: ${props => props.scale ? props.scale * 0.3 : 0.3}rem;
   background-color: ${props => props.backgroundColor ? props.backgroundColor : "var(--four)"};
+
+  margin-left: auto;
+  margin-right: auto;
 `;
 
 export const VL = styled.div<{ scale?: number, length?: number, backgroundColor?: string }>`
   width: ${props => props.scale ? props.scale * 0.3 : 0.3}rem;
   height: ${props => props.length ? props.length : 100}%;
   background-color: ${props => props.backgroundColor ? props.backgroundColor : "var(--four)"};
-`;
+
+  margin-top: auto;
+  margin-bottom: auto;
+  `;
 
 export const HStack100 = styled.div`
   width: 100%;

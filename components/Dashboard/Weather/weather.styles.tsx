@@ -9,7 +9,6 @@ export const WeatherHeader = styled.div`
 
   margin-left: 1rem;
   margin-right: 1rem;
-  margin-bottom: 1rem;
 `
 
 export const TempText = styled.h2`
@@ -84,10 +83,10 @@ export const LocationTextWrapper = styled.div`
   margin-right: auto;
   margin-bottom: 2rem;
   `
-export const LocationText = styled.h5`
+export const LocationText = styled.pre`
   background-color: var(--two);
   font-size: 0.7rem;
-  font-family: Roboto;
+  font-family: Roboto mono;
   font-weight: 500;
   position: absolute;
   white-space: nowrap;
