@@ -3,7 +3,7 @@ import Head from "next/head";
 import Image from "next/image";
 import React from "react";
 import { AppContainer, AppContainerVH, SpacerV, SpacerH, HStack, VStack, HStack100, VStack100 } from "../components/common";
-import { NotesApp, WeatherSummaryApp, WebLinksApp } from "../components/Dashboard";
+import Dashboard, { NotesApp, WeatherSummaryApp, WebLinksApp } from "../components/Dashboard";
 import styles from "../styles/Home.module.css";
 import { HomeProps } from "../types";
 import ThemeButton from "./../components/ThemeButton/index";
@@ -18,38 +18,7 @@ const Home: NextPage<> = ({ theme, currentWeather }) => {
       </Head>
 
       <main className={styles.main}>
-        <VStack100>
-          <HStack100>
-            <VStack width="350px" shrink={0} >
-              <NotesApp basis={250} shrink={1} />
-              <SpacerV />
-              <WeatherSummaryApp currentWeather={currentWeather} />
-            </VStack>
-
-            <SpacerH />
-
-            <VStack width="200px" shrink={0} >
-              <WebLinksApp />
-              <SpacerV />
-              <AppContainerVH />
-            </VStack>
-
-            <SpacerH />
-
-            <VStack width="1000px" shrink={0}>
-              <AppContainerVH />
-              <SpacerV />
-              <AppContainerVH />
-            </VStack>
-
-            <SpacerH />
-
-            <AppContainer width={400} shrink={0.1} />
-            <SpacerH />
-            <AppContainer width={600} shrink={0.1} />
-
-          </HStack100>
-        </VStack100>
+        <Dashboard currentWeather={currentWeather} />
       </main>
 
       <footer className={styles.footer}></footer>
