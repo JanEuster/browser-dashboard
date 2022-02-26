@@ -1,4 +1,4 @@
-import { AppContainerVH, HL, HStack, VL, VStack } from "../Globals";
+import { AppContainerVH, HL, HStack, VL, VStack } from "../common";
 import { Header, HeaderTitle, LinkCard, LinksContainer, Favicon, LinkTitle } from "./weblinks.styles";
 import globalStyles from "../../styles/Home.module.css";
 import Link from "next/link";

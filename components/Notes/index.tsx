@@ -10,9 +10,9 @@ import {
   NoteContentContainer,
   NoteEditableTitle,
 } from "./notes.styles";
-import { INote } from "../../types";
+import { IFlex, INote } from "../../types";
 import { Plus, Notepad, Note as NoteIcon, X, Trash } from "phosphor-react";
-import { AppContainerVH, HL, VL } from "../Globals";
+import { AppContainerVH, HL, VL } from "../common";
 
 
 const NotePreview: React.FC<{ title: string; setNoteView: Function }> = (
@@ -21,7 +21,7 @@ const NotePreview: React.FC<{ title: string; setNoteView: Function }> = (
   return (
     <NotePreviewContainer onClick={() => props.setNoteView()}>
       <NoteIcon size={38} weight="bold" />
-      <VL />
+      <VL scale={0.45} />
       <NoteTitle>{props.title}</NoteTitle>
     </NotePreviewContainer>
   );
@@ -43,7 +43,7 @@ const NoteView: React.FC<{ content: string; setContent: Function }> = (
   );
 };
 
-const NotesApp: React.FC<{shrink?: number}> = ({shrink}) => {
+const NotesApp: React.FC<IFlex> = ({basis, shrink, grow}) => {
   const [notes, setNotes] = useState<INote[]>([]);
 
   const titleInputRef = useRef();
@@ -80,18 +80,21 @@ const NotesApp: React.FC<{shrink?: number}> = ({shrink}) => {
       }
     });
 
+
     let newNotes: INote[] | undefined;
-    if (notesPos !== undefined) {
-      newNotes = notes?.slice(0, notesPos);
-      newNotes?.push(noteView);
-      newNotes?.push(...notes?.slice(notesPos + 1));
-    } else {
-      let note = noteView;
-      if (noteView?.title === "") noteView?.title = "New Note";
-      newNotes = [...notes, noteView];
+    if (noteView) {
+      if (noteView?.title === "") noteView.title = "New Note";
+      
+      if (notesPos !== undefined) {
+        newNotes = notes?.slice(0, notesPos);
+        newNotes?.push(noteView);
+        newNotes?.push(...notes?.slice(notesPos + 1));
+      } else {
+        newNotes = [...notes, noteView];
+      }
     }
 
-    setNotes(newNotes);
+    if (newNotes) setNotes(newNotes);
     setNoteView(undefined);
   }
 
@@ -106,7 +109,7 @@ const NotesApp: React.FC<{shrink?: number}> = ({shrink}) => {
   useEffect(() => {
     try {
       const json = localStorage.getItem("Notes");
-      const n = JSON.parse(json);
+      const n = JSON.parse(json ? json : "");
       if (n) {
         setNotes(n);
         console.log("load notes");
@@ -129,7 +132,7 @@ const NotesApp: React.FC<{shrink?: number}> = ({shrink}) => {
   }, [notes]);
 
   return (
-    <AppContainerVH shrink={shrink}>
+    <AppContainerVH basis={basis} shrink={shrink} grow={grow}>
           
         <NoteHeaderContainer>
           {noteView ? (

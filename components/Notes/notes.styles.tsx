@@ -18,7 +18,7 @@ export const NoteHeaderTitle = styled.span`
 
 export const NoteEditableTitle = styled.input`
   background-color: var(--one);
-  width: 16rem;
+  width: 75%;
   color: var(--text);
   font-family: Roboto black;
   font-size: 2rem;

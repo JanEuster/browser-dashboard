@@ -1,25 +1,26 @@
 import styled from "styled-components";
 import globalStyles from "../../styles/home.module.css";
+import { IFlex, IFlexH, IFlexW, IFlexWH } from "../../types";
 
-export const HL = styled.div`
+export const HL = styled.div<{scale?: number}>`
   width: 100%;
-  height: 0.3rem;
+  height: ${props => props.scale ? props.scale*0.3 : 0.3}rem;
   background-color: var(--four);
 `;
 
-export const VL = styled.div`
-  width: 0.3rem;
-  height: 90%;
+export const VL = styled.div<{scale?: number}>`
+  width: ${props => props.scale ? props.scale*0.3 : 0.3}rem;
+  height: 100%;
   background-color: var(--four);
 `;
 
 export const HStack100 = styled.div`
   width: 100%;
-  height: 80vh;
+  height: 90vh;
   display: flex;
   // justify-content: space-evenly;
   align-items: center;
-  padding: 2rem 0;
+  // padding: 2rem 0;
 
   overflow-x: scroll;
   &::-webkit-scrollbar {
@@ -38,7 +39,7 @@ export const HStack100 = styled.div`
   }
 `
 export const VStack100 = styled.div`
-  width: 80vw;
+  width: 95vw;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -46,9 +47,12 @@ export const VStack100 = styled.div`
   align-items: center;
 `
 
-export const HStack = styled.div<{ height: string, shrink?: number, grow?: number }>`
+
+
+export const HStack = styled.div <IFlexH>`
   width: 100%;
   height: ${(props) => props.height};
+  ${(props) => props.basis !== undefined ? `flex-basis: ${props.basis}%;` : null}
   ${(props) => props.shrink !== undefined ? `flex-shrink: ${props.shrink};` : null}
   ${(props) => props.grow !== undefined ? `flex-grow: ${props.grow};` : null}
 
@@ -63,9 +67,10 @@ export const HStack = styled.div<{ height: string, shrink?: number, grow?: numbe
  ; }
 `
 
-export const VStack = styled.div<{width: string, shrink?: number, grow?: number }>`
+export const VStack = styled.div<IFlexW>`
   width: ${props => props.width};
   height: 100%;
+  ${(props) => props.basis !== undefined ? `flex-basis: ${props.basis}%;` : null}
   ${(props) => props.shrink !== undefined ? `flex-shrink: ${props.shrink};` : null}
   ${(props) => props.grow !== undefined ? `flex-grow: ${props.grow};` : null}
 
@@ -81,11 +86,12 @@ export const VStack = styled.div<{width: string, shrink?: number, grow?: number 
   }
 `
 
-export const AppContainer = styled.div<{ width?: number, height?: number, shrink?: number, grow?: number }>`
+export const AppContainer = styled.div<IFlexWH>`
   width: ${props => props.width !== undefined ? `${props.width}px` : "100%"};
   height: ${props => props.height !== undefined ? `${props.height}px` : "100%"};
   // min-width: 150px;
   // min-height: 150px;
+  ${(props) => props.basis !== undefined ? `flex-basis: ${props.basis}%;` : null}
   ${(props) => props.shrink !== undefined ? `flex-shrink: ${props.shrink};` : null}
   ${(props) => props.grow !== undefined ? `flex-grow: ${props.grow};` : null}
 
@@ -97,11 +103,12 @@ export const AppContainer = styled.div<{ width?: number, height?: number, shrink
   flex-direction: column;
 `;
 
-export const AppContainerVH = styled.div<{ shrink?: number, grow?: number }>`
+export const AppContainerVH = styled.div<IFlex>`
   width: 100%;
   height: 100%;
   // min-width: 150px;
   // min-height: 150px;
+  ${(props) => props.basis !== undefined ? `flex-basis: ${props.basis}%;` : null}
   ${(props) => props.shrink !== undefined ? `flex-shrink: ${props.shrink};` : null}
   ${(props) => props.grow !== undefined ? `flex-grow: ${props.grow};` : null}
   background-color: var(--zero);
