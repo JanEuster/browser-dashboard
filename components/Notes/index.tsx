@@ -12,7 +12,7 @@ import {
 } from "./notes.styles";
 import { INote } from "../../types";
 import { Plus, Notepad, Note as NoteIcon, X, Trash } from "phosphor-react";
-import { AppContainerV, HL, VL } from "../Globals";
+import { AppContainerVH, HL, VL } from "../Globals";
 
 
 const NotePreview: React.FC<{ title: string; setNoteView: Function }> = (
@@ -43,7 +43,7 @@ const NoteView: React.FC<{ content: string; setContent: Function }> = (
   );
 };
 
-const NotesApp: React.FC<> = () => {
+const NotesApp: React.FC<{shrink?: number}> = ({shrink}) => {
   const [notes, setNotes] = useState<INote[]>([]);
 
   const titleInputRef = useRef();
@@ -129,7 +129,7 @@ const NotesApp: React.FC<> = () => {
   }, [notes]);
 
   return (
-    <AppContainerV width="375px">
+    <AppContainerVH shrink={shrink}>
           
         <NoteHeaderContainer>
           {noteView ? (
@@ -184,7 +184,7 @@ const NotesApp: React.FC<> = () => {
           </NotePreviewListContainer>
       )}
       <HL />
-    </AppContainerV>
+    </AppContainerVH>
   );
 };
 

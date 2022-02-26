@@ -1,4 +1,4 @@
-import { AppContainerV, HL, HStack, VL, VStack } from "../Globals";
+import { AppContainerVH, HL, HStack, VL, VStack } from "../Globals";
 import { Header, HeaderTitle, LinkCard, LinksContainer, Favicon, LinkTitle } from "./weblinks.styles";
 import globalStyles from "../../styles/Home.module.css";
 import Link from "next/link";
@@ -20,9 +20,9 @@ const LinkItem: React.FC<{title: string, src: string}> = ({title, src}) => {
   );
 }
 
-const WebLinks: React.FC<{width: string}> = ({width}) => {
+const WebLinks: React.FC<{shrink?: number}> = ({shrink}) => {
   return (
-    <AppContainerV width={width}>
+    <AppContainerVH shrink={shrink}>
       <Header>
         <HeaderTitle>Links</HeaderTitle>
       </Header>
@@ -36,7 +36,7 @@ const WebLinks: React.FC<{width: string}> = ({width}) => {
           <LinkItem title="Blender" src="https://www.blender.org/"/>
         </LinksContainer>
         <HL />
-    </AppContainerV>
+    </AppContainerVH>
   )
 }
 

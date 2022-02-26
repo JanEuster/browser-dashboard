@@ -55,6 +55,7 @@ export const NotePreviewContainer = styled.div`
   margin-bottom: 0.3rem;
   border: 0.3rem solid var(--four);
   box-sizing: border-box;
+  overflow: hidden;
 
   cursor: pointer;
   display: flex;
@@ -65,6 +66,7 @@ export const NoteTitle = styled.h2`
   font-size: 1.5rem;
   padding: 0 0.4rem;
   user-select: none;
+  white-space: nowrap;
 `;
 
 export const NoteContentContainer = styled.div`

@@ -28,7 +28,7 @@ export const LinksContainer = styled.div`
 export const LinkCard = styled.div`
   width: 93%;
   min-height: 2rem;
-  height: 5vh;
+  height: 3.2vh;
   max-height: 3.5rem;
   background-color: var(--three);
   border-radius: 15px;
