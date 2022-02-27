@@ -72,6 +72,10 @@ export const InfoBoxElement = styled.div`
   justify-content: center;
   align-items: center;
   margin-right: 1.5rem;
+
+  & p{
+    padding: 0 0.4rem;
+  }
 `
 
 export const LocationTextWrapper = styled.div`

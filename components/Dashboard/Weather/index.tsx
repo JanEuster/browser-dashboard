@@ -69,6 +69,44 @@ const determineWeatherMainIcon = (weatherMain: string, isDaylight: boolean, clou
   }
 }
 
+const isInRange = (deg: number, start: number, end: number): boolean => {
+  if (deg > start && deg < end) return true;
+  return false;
+}
+
+type windDirection = {
+  direction: string,
+  startDeg: number,
+  endDeg: number,
+}
+
+const windDirections: windDirection[] = [
+  { direction: "N", startDeg: 360 - 11.25, endDeg: 11.25 },
+  { direction: "NNE", startDeg: 11.25, endDeg: 3 * 11.25 },
+  { direction: "NE", startDeg: 3 * 11.25, endDeg: 5 * 11.25 },
+  { direction: "ENE", startDeg: 5 * 11.25, endDeg: 7 * 11.25 },
+  { direction: "E", startDeg: 7 * 11.25, endDeg: 9 * 11.25 },
+  { direction: "ESE", startDeg: 9 * 11.25, endDeg: 11 * 11.25 },
+  { direction: "SE", startDeg: 11 * 11.25, endDeg: 13 * 11.25 },
+  { direction: "SSE", startDeg: 13 * 11.25, endDeg: 15 * 11.25 },
+  { direction: "S", startDeg: 15 * 11.25, endDeg: 17 * 11.25 },
+  { direction: "SSW", startDeg: 17 * 11.25, endDeg: 19 * 11.25 },
+  { direction: "SW", startDeg: 19 * 11.25, endDeg: 21 * 11.25 },
+  { direction: "WSW", startDeg: 21 * 11.25, endDeg: 23 * 11.25 },
+  { direction: "W", startDeg: 23 * 11.25, endDeg: 25 * 11.25 },
+  { direction: "WNW", startDeg: 25 * 11.25, endDeg: 27 * 11.25 },
+  { direction: "NW", startDeg: 27 * 11.25, endDeg: 29 * 11.25 },
+  { direction: "NNW", startDeg: 29 * 11.25, endDeg: 31 * 11.25 },
+]
+const determineWindDirection = (deg: number): string => {
+  deg = deg % 360;
+  let direction = String(deg) + "°";
+
+  windDirections.forEach(dir => {
+    if (isInRange(deg, dir.startDeg, dir.endDeg)) { direction = dir.direction; return; }
+  })
+  return direction;
+}
 const WeatherSummaryApp: React.FC<{ currentWeather: WeatherDataCurrent }> = ({ currentWeather }) => {
   // convert unix format to date object of current timezone
   // currentWeather.timezoen is time offset from UTC in seconds
@@ -86,8 +124,8 @@ const WeatherSummaryApp: React.FC<{ currentWeather: WeatherDataCurrent }> = ({ c
   let isDaylight = !(beforeSunrise || afterSunset)
 
 
-  let weatherMainIcon = determineWeatherMainIcon(currentWeather.weather[0].main.toLowerCase(), isDaylight)
-
+  let weatherMainIcon = determineWeatherMainIcon(currentWeather.weather[0].main.toLowerCase(), isDaylight, currentWeather.clouds.all)
+  let windDirection = determineWindDirection(180 + currentWeather.wind.deg);
   return (
     <AppContainerVH backgroundColor="var(--one)">
       <WeatherHeader>
@@ -118,22 +156,22 @@ const WeatherSummaryApp: React.FC<{ currentWeather: WeatherDataCurrent }> = ({ c
 
         <InfoBox>
           <InfoBoxRow>
-            <InfoBoxElement><Wind size={30} weight="bold" /> {currentWeather.wind.speed} m/s </InfoBoxElement>
-            <InfoBoxElement><Rotate r={currentWeather.wind.deg}> <WindArrow size={30} /> </Rotate> {currentWeather.wind.deg}° </InfoBoxElement>
+            <InfoBoxElement><Wind size={30} weight="bold" /> <p>{currentWeather.wind.speed}</p> m/s </InfoBoxElement>
+            <InfoBoxElement><Rotate r={180 + currentWeather.wind.deg}> <WindArrow size={30} /> </Rotate> <p>{windDirection}</p> </InfoBoxElement>
           </InfoBoxRow>
 
           <HL length={96} scale={0.6} backgroundColor="var(--two)" />
 
           <InfoBoxRow>
-            <InfoBoxElement><DropHalf size={30} weight="bold" />{currentWeather.main.humidity} %</InfoBoxElement>
-            <InfoBoxElement><Tray size={30} weight="bold" />{currentWeather.main.pressure} hPa</InfoBoxElement>
+            <InfoBoxElement><DropHalf size={30} weight="bold" /> <p>{currentWeather.main.humidity} %</p> </InfoBoxElement>
+            <InfoBoxElement><Tray size={30} weight="bold" /> <p>{currentWeather.main.pressure} hPa</p> </InfoBoxElement>
           </InfoBoxRow>
 
           <HL length={96} scale={0.6} backgroundColor="var(--two)" />
 
           <InfoBoxRow>
-            <InfoBoxElement><SunHorizon size={30} weight="fill" />{format(sunriseTime, "HH:mm")}</InfoBoxElement>
-            <InfoBoxElement><SunHorizon size={30} weight="regular" />{format(sunsetTime, "HH:mm")}</InfoBoxElement>
+            <InfoBoxElement><SunHorizon size={30} weight="fill" /> <p>{format(sunriseTime, "HH:mm")}</p> </InfoBoxElement>
+            <InfoBoxElement><SunHorizon size={30} weight="regular" /> <p>{format(sunsetTime, "HH:mm")}</p> </InfoBoxElement>
           </InfoBoxRow>
         </InfoBox>
 
