@@ -8,7 +8,7 @@ const Dashboard: React.FC<{ currentWeather: WeatherDataCurrent }> = ({ currentWe
   return (
     <VStack100>
       <HStack100>
-        <VStack width="350px" shrink={0} >
+        <VStack width="375px" shrink={0} >
           <NotesApp basis={250} shrink={1} />
           <SpacerV />
           <WeatherSummaryApp currentWeather={currentWeather} />

@@ -72,7 +72,7 @@ export const NoteTitle = styled.h2`
 export const NoteContentContainer = styled.div`
   background-color: var(--zero);
   width: 100%;
-  height: calc(600px - 3.3rem);
+  height: 100%;
   margin: 0;
   display: flex;
   justify-content: center;
@@ -84,7 +84,7 @@ export const NoteContent = styled.textarea`
   width: calc(100% - 0.6rem);
   height: calc(100% - 1rem);
   font-family: Roboto Mono;
-  font-size: 1.3rem;
+  font-size: 1.05rem;
   resize: none;
   outline: none;
 
