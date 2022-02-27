@@ -1,4 +1,4 @@
-import { Cloud, CloudFog, CloudLightning, CloudMoon, CloudRain, CloudSnow, Drop, DropHalf, Moon, MoonStars, Sun, SunDim, Tray, Wind, Rainbow, ThermometerCold, ThermometerHot, SunHorizon, Flame, Gradient, FunnelSimple } from "phosphor-react";
+import { Cloud, CloudFog, CloudLightning, CloudMoon, CloudRain, CloudSnow, Drop, DropHalf, Moon, MoonStars, Sun, SunDim, Tray, Wind, Rainbow, ThermometerCold, ThermometerHot, SunHorizon, Flame, Gradient, FunnelSimple, CloudSun } from "phosphor-react";
 import React, { ReactElement, useEffect, useState } from "react";
 import { AppContainerVH, CustomIcon, HL, Rotate, VL, VStack } from "../../common";
 import { CenteredDiv, ConditionDesc, InfoBox, InfoBoxElement, InfoBoxRow, LocationText, LocationTextWrapper, TempMinMax, TempMinMaxText, TempText, WeatherHeader } from "./weather.styles";
@@ -10,7 +10,7 @@ const WindArrow: React.FC<{ size: number }> = ({ size }) => { return <CustomIcon
 const ICON_SIZE = 76;
 
 
-const determineWeatherMainIcon = (weatherMain: string, isDaylight: boolean): ReactElement<any, any> => {
+const determineWeatherMainIcon = (weatherMain: string, isDaylight: boolean, cloudyness: number): ReactElement<any, any> => {
   // determine main icons of the WeatherData.weather[0].main variations
   // based on: https://openweathermap.org/weather-conditions
   switch (weatherMain) {
@@ -20,7 +20,13 @@ const determineWeatherMainIcon = (weatherMain: string, isDaylight: boolean): Rea
 
     // clouds group
     case "clouds":
-      return isDaylight ? <Cloud size={ICON_SIZE} weight="bold" /> : <CloudMoon size={ICON_SIZE} weight="bold" />;
+      if (cloudyness > 50) {
+        // if cloud coverage > 50% show fulll cloud
+        return <Cloud size={ICON_SIZE} weight="bold" />
+      } else {
+        // otherwise sun or moon peek through clouds
+        return isDaylight ? <CloudSun size={ICON_SIZE} weight="bold" /> : <CloudMoon size={ICON_SIZE} weight="bold" />;
+      }
 
     // atmosphere group
     case "mist":
@@ -126,8 +132,8 @@ const WeatherSummaryApp: React.FC<{ currentWeather: WeatherDataCurrent }> = ({ c
           <HL length={96} scale={0.6} backgroundColor="var(--two)" />
 
           <InfoBoxRow>
-            <InfoBoxElement><SunHorizon size={30} weight="regular" />{format(sunriseTime, "HH:mm")}</InfoBoxElement>
-            <InfoBoxElement><SunHorizon size={30} weight="fill" />{format(sunsetTime, "HH:mm")}</InfoBoxElement>
+            <InfoBoxElement><SunHorizon size={30} weight="fill" />{format(sunriseTime, "HH:mm")}</InfoBoxElement>
+            <InfoBoxElement><SunHorizon size={30} weight="regular" />{format(sunsetTime, "HH:mm")}</InfoBoxElement>
           </InfoBoxRow>
         </InfoBox>
 
