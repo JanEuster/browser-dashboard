@@ -6,10 +6,10 @@ import React, { useEffect } from "react";
 import { AppContainer, AppContainerVH, SpacerV, SpacerH, HStack, VStack, HStack100, VStack100 } from "../components/common";
 import Dashboard from "../components/Dashboard";
 import styles from "../styles/Home.module.css";
-import { HomeProps } from "../types";
+import { HomeProps, WeatherDataCurrent } from "../types";
 import ThemeButton from "./../components/ThemeButton/index";
 
-const Home: NextPage<> = ({ theme, currentWeather }) => {
+const Home: NextPage<{ theme: string, currentWeather: WeatherDataCurrent }> = ({ theme, currentWeather }) => {
   const router = useRouter();
 
 
@@ -42,7 +42,7 @@ const Home: NextPage<> = ({ theme, currentWeather }) => {
 
 
 
-export async function getServerSideProps({ }) {
+export async function getServerSideProps({ }): Promise<{ props: { currentWeather: WeatherDataCurrent } }> {
   // get current weather data
   let weatherRes = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=52.51637&lon=13.37849&appid=${process.env.OPENWEATHER_APP_ID}&units=metric`);
   let weatherData = await weatherRes.json();
