@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import globalStyles from "../../styles/home.module.css";
-import { IFlex, IFlexH, IFlexW, IFlexWH } from "../../types";
+import { IFlex } from "../../types";
 
 export const HL = styled.div<{ scale?: number, length?: number, backgroundColor?: string }>`
   width: ${props => props.length ? props.length : 100}%;

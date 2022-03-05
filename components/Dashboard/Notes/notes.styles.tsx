@@ -126,6 +126,7 @@ export const Icon = styled.div`
   align-items: center;
 
   transition: background-color 0.3s ease;
+  transition: border 0.15s ease;
 
   &:hover {
     background-color: var(--three);

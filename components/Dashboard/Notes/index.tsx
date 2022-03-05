@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { MutableRefObject, useEffect, useRef, useState } from "react";
 import {
   NoteHeaderTitle,
   NoteTitle,
@@ -43,7 +43,7 @@ const NoteView: React.FC<{ content: string; setContent: Function }> = (
   );
 };
 
-const NotesApp: React.FC<IFlex> = ({basis, shrink, grow}) => {
+const NotesApp: React.FC<IFlex> = ({ basis, shrink, grow }) => {
   const [notes, setNotes] = useState<INote[]>([]);
 
   const titleInputRef = useRef();
@@ -84,7 +84,7 @@ const NotesApp: React.FC<IFlex> = ({basis, shrink, grow}) => {
     let newNotes: INote[] | undefined;
     if (noteView) {
       if (noteView?.title === "") noteView.title = "New Note";
-      
+
       if (notesPos !== undefined) {
         newNotes = notes?.slice(0, notesPos);
         newNotes?.push(noteView);
@@ -133,58 +133,58 @@ const NotesApp: React.FC<IFlex> = ({basis, shrink, grow}) => {
 
   return (
     <AppContainerVH basis={basis} shrink={shrink} grow={grow}>
-          
-        <NoteHeaderContainer>
-          {noteView ? (
-            <>
-              <NoteIcon size={40} weight="bold" />
-              <NoteEditableTitle
-                type="text"
-                ref={titleInputRef}
-                placeholder="New Note"
-                value={noteView.title}
-                onChange={(e) => changeTitle(e.target.value)}
-                />
-              <Icon onClick={() => closeNote()}>
-                <X size={40} weight="bold" />
-              </Icon>
-              <Icon onClick={() => deleteNote()}>
-                <Trash size={40} weight="bold" />
-              </Icon>
-            </>
-          ) : (
-            <>
-              <Notepad size={44} weight="bold" />
-              <NoteHeaderTitle> Notes </NoteHeaderTitle>
-              <Icon onClick={() => addNote()}>
-                <Plus size={40} weight="bold" />
-              </Icon>
-            </>
-          )}
-        </NoteHeaderContainer>
 
-        <HL />
-        
+      <NoteHeaderContainer>
+        {noteView ? (
+          <>
+            <NoteIcon size={40} weight="bold" />
+            <NoteEditableTitle
+              type="text"
+              ref={titleInputRef}
+              placeholder="New Note"
+              value={noteView.title}
+              onChange={(e) => changeTitle(e.target.value)}
+            />
+            <Icon onClick={() => closeNote()}>
+              <X size={40} weight="bold" />
+            </Icon>
+            <Icon onClick={() => deleteNote()}>
+              <Trash size={40} weight="bold" />
+            </Icon>
+          </>
+        ) : (
+          <>
+            <Notepad size={44} weight="bold" />
+            <NoteHeaderTitle> Notes </NoteHeaderTitle>
+            <Icon onClick={() => addNote()}>
+              <Plus size={40} weight="bold" />
+            </Icon>
+          </>
+        )}
+      </NoteHeaderContainer>
+
+      <HL />
+
       {noteView ? (
         <NoteView
-        content={noteView.content}
-        setContent={(e: React.ChangeEvent<HTMLInputElement>) =>
-          changeContent(e.target.value)
-        }
+          content={noteView.content}
+          setContent={(e: React.ChangeEvent<HTMLInputElement>) =>
+            changeContent(e.target.value)
+          }
         />
       ) : (
         <NotePreviewListContainer>
-            {notes !== undefined &&
-              notes.map((note, i) => {
-                return (
-                  <NotePreview
+          {notes !== undefined &&
+            notes.map((note, i) => {
+              return (
+                <NotePreview
                   key={i}
                   title={note.title}
                   setNoteView={() => setNoteView(note)}
-                  />
-                  );
-                })}
-          </NotePreviewListContainer>
+                />
+              );
+            })}
+        </NotePreviewListContainer>
       )}
       <HL />
     </AppContainerVH>
