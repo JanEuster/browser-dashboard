@@ -11,6 +11,9 @@ const Game: React.FC<{}> = () => {
   switch (String(game_id).toLowerCase()) {
     case "snake":
       game = new SnakeGame();
+      break
+    default:
+      return <h1>404 Game Not Found</h1>
   }
 
 
