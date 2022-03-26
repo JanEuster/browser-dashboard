@@ -11,16 +11,20 @@ class SnakeGame {
   WIDTH = 780;
   HEIGHT = 600;
   FIELD_SIZE = 60;
+  RADIUS = this.FIELD_SIZE / 2
+  DEFAULT_SNAKE = [[4, 5], [3, 5]]
   ROWS = this.HEIGHT / this.FIELD_SIZE;
   COLUMNS = this.WIDTH / this.FIELD_SIZE;
   direction: Directions;
+  prevDirection: Directions;
   snake: number[][];
-  apple: false | Number[];
+  apple: false | number[];
 
   constructor() {
 
-    this.snake = [[4, 5], [3, 5]];
+    this.snake = this.DEFAULT_SNAKE;
     this.direction = Directions.Right;
+    this.prevDirection = this.direction;
     this.apple = false;
     this.spawnApple();
 
@@ -30,7 +34,6 @@ class SnakeGame {
   }
 
   handleEvents(e: MouseEvent | KeyboardEvent): void {
-    const prevDirection = this.direction;
 
     if (e instanceof KeyboardEvent) {
       switch (e.code) {
@@ -49,13 +52,13 @@ class SnakeGame {
       }
     }
 
-    if (prevDirection !== this.direction && !((prevDirection + this.direction) % 2)) {
+    if (this.prevDirection !== this.direction && !((this.prevDirection + this.direction) % 2)) {
       return this.reset();
     }
   }
 
   reset() {
-    this.snake = [[4, 5], [3, 5]];
+    this.snake = this.DEFAULT_SNAKE;
     this.direction = Directions.Right;
     this.apple = false;
     this.spawnApple();
@@ -70,13 +73,15 @@ class SnakeGame {
 
   spawnApple() {
     if (!this.apple) {
-      let x = Math.round(Math.random() * this.COLUMNS);
-      let y = Math.round(Math.random() * this.ROWS);
+      let x = Math.round(Math.random() * (this.COLUMNS - 1));
+      let y = Math.round(Math.random() * (this.ROWS - 1));
       this.apple = [x, y];
     }
   }
 
   update() {
+    this.prevDirection = this.direction;
+
     // move snake
     let newSnake: number[][] = []
     switch (this.direction) {
@@ -93,37 +98,33 @@ class SnakeGame {
         newSnake.push([this.snake[0][0] - 1, this.snake[0][1]]);
         break
     }
-    if (this.isOutsideField(newSnake[0])) {
-      return this.reset()
-    }
     newSnake.push(...this.snake);
     this.snake = newSnake;
-    this.snake.pop();
+    let last = this.snake.pop();
 
-    if (this.snake[0][0] == this.apple[0] && this.snake[0][1] == this.apple[1]) {
-      this.apple = false;
-      let i = this.snake.length - 1
-
-      switch (this.direction) {
-        case Directions.Up:
-          this.snake.push([this.snake[i][0], this.snake[i][1] + 1]);
-          break
-        case Directions.Right:
-          this.snake.push([this.snake[i][0] - 1, this.snake[i][1]]);
-          break
-        case Directions.Down:
-          this.snake.push([this.snake[i][0], this.snake[i][1] - 1]);
-          break
-        case Directions.Left:
-          this.snake.push([this.snake[i][0] + 1, this.snake[i][1]]);
-          break
+    this.snake.forEach(([x, y]) => {
+      if (last && this.apple && this.apple[0] == x && this.apple[1] == y) {
+        this.apple = false;
+        this.snake.push(last);
       }
+
+    })
+
+    // is snake head outside field
+    if (this.isOutsideField(this.snake[0])) {
+      return this.reset();
     }
 
     // randomly spawn apple
-    if (Math.random() * 10 < 3) {
+    if (Math.random() * 10 < 5) {
       this.spawnApple()
     }
+
+    // self collision on snake
+    this.snake.slice(1).forEach(([x, y]) => {
+      if (this.snake[0][0] == x && this.snake[0][1] == y) this.reset();
+
+    })
   }
 
   draw(ctx: CanvasRenderingContext2D) {
@@ -146,19 +147,24 @@ class SnakeGame {
     }
 
     // draw snake body
-    this.snake.forEach(pos => {
-      ctx.beginPath();
-      ctx.fillStyle = "#FF573F";
-      ctx.rect(pos[0] * this.FIELD_SIZE, pos[1] * this.FIELD_SIZE, this.FIELD_SIZE, this.FIELD_SIZE);
-      ctx.fill();
-      ctx.closePath();
+    ctx.beginPath();
+    ctx.strokeStyle = "#FF573F";
+    ctx.lineWidth = this.RADIUS * 1.3;
+    ctx.lineCap = "square"
+
+    ctx.moveTo(this.snake[0][0] * this.FIELD_SIZE + this.RADIUS, this.snake[0][1] * this.FIELD_SIZE + this.RADIUS);
+    this.snake.forEach(([x, y]) => {
+      ctx.lineTo(x * this.FIELD_SIZE + this.RADIUS, y * this.FIELD_SIZE + this.RADIUS);
     })
+
+    ctx.stroke();
+    ctx.closePath();
 
     // draw apple
     if (this.apple) {
       ctx.beginPath();
       ctx.fillStyle = "#FF573F";
-      ctx.arc(this.apple[0] * this.FIELD_SIZE + this.FIELD_SIZE / 2, this.apple[1] * this.FIELD_SIZE + this.FIELD_SIZE / 2, this.FIELD_SIZE / 3, 0, 360);
+      ctx.arc(this.apple[0] * this.FIELD_SIZE + this.RADIUS, this.apple[1] * this.FIELD_SIZE + this.RADIUS, this.FIELD_SIZE * 0.3, 0, 360);
       ctx.fill();
       ctx.closePath();
     }

@@ -1,12 +1,11 @@
 import { useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 import SnakeGame from "../../components/Games/Snake";
-import { Centered, VStack } from "../../components/common";
+import { Centered } from "../../components/common";
 
 const Game: React.FC<{}> = () => {
   const router = useRouter();
   const { game_id } = router.query
-  console.log(game_id)
 
   var game: SnakeGame = new SnakeGame();
   switch (String(game_id).toLowerCase()) {
