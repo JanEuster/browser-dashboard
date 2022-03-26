@@ -1,30 +1,6 @@
 import styled from "styled-components"
 
 
-export const Header = styled.div`
-  height: 2rem;
-  background-color: var(--two);
-  display: flex;
-  align-items: center;
-  padding: 0 0.4rem;
-`
-
-export const HeaderTitle = styled.div`
-  font-size: 1.4em;
-  color: var(--six);
-`
-
-export const LinksContainer = styled.div`
-  background-color: var(--one);
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  overflow: scroll;
-`
-
 export const LinkCard = styled.div`
   width: 93%;
   min-height: 2rem;
