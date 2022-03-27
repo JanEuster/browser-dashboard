@@ -3,12 +3,14 @@ import WebLinksApp from "./WebLinks"
 import WeatherSummaryApp from "./Weather"
 import { VStack100, HStack100, SpacerV, VStack, SpacerH, AppContainerVH, AppContainer } from "../common";
 import { WeatherDataCurrent } from "../../types";
+import ConverterApp from "./Converter";
+import GameLinksApp from "./Games";
 
 const Dashboard: React.FC<{ currentWeather: WeatherDataCurrent }> = ({ currentWeather }) => {
   return (
     <VStack100>
       <HStack100>
-        <VStack width="375px" shrink={0} >
+        <VStack width="400px" shrink={0} >
           <NotesApp basis={250} shrink={1} />
           <SpacerV />
           <WeatherSummaryApp currentWeather={currentWeather} />
@@ -19,13 +21,13 @@ const Dashboard: React.FC<{ currentWeather: WeatherDataCurrent }> = ({ currentWe
         <VStack width="200px" shrink={0} >
           <WebLinksApp />
           <SpacerV />
-          <AppContainerVH />
+          <GameLinksApp />
         </VStack>
 
         <SpacerH />
 
-        <VStack width="1000px" shrink={0}>
-          <AppContainerVH />
+        <VStack width="400px" shrink={0}>
+          <ConverterApp shrink={3} />
           <SpacerV />
           <AppContainerVH />
         </VStack>

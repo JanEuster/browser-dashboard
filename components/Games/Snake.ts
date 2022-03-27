@@ -8,13 +8,14 @@ enum Directions {
 }
 
 class SnakeGame {
-  WIDTH = 780;
-  HEIGHT = 600;
-  FIELD_SIZE = 60;
-  RADIUS = this.FIELD_SIZE / 2
+  FPS = 5;
+  COLUMNS = 13;
+  ROWS = 10;
+  FIELD_SIZE = Math.round(window.innerHeight / this.COLUMNS * 0.75);
+  RADIUS = this.FIELD_SIZE / 2;
+  WIDTH = this.COLUMNS * this.FIELD_SIZE;
+  HEIGHT = this.ROWS * this.FIELD_SIZE;
   DEFAULT_SNAKE = [[4, 5], [3, 5]]
-  ROWS = this.HEIGHT / this.FIELD_SIZE;
-  COLUMNS = this.WIDTH / this.FIELD_SIZE;
   direction: Directions;
   prevDirection: Directions;
   snake: number[][];
