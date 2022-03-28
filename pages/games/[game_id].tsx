@@ -4,6 +4,7 @@ import SnakeGame from "../../components/Games/Snake";
 import { Centered } from "../../components/common";
 import GameType from "../../components/Games";
 import PongGame from "../../components/Games/Pong";
+import TicTacToeGame from "../../components/Games/TicTacToe";
 
 const Game: React.FC<{}> = () => {
   const router = useRouter();
@@ -17,6 +18,9 @@ const Game: React.FC<{}> = () => {
       break
     case "pong":
       game = new PongGame();
+      break
+    case "tictactoe":
+      game = new TicTacToeGame();
       break
     default:
       isValidURL = false;
@@ -43,7 +47,7 @@ const Game: React.FC<{}> = () => {
       }
 
       window.addEventListener("keydown", handleEvents);
-      window.addEventListener("keypress", handleEvents);
+      window.addEventListener("contextmenu", handleEvents);
       window.addEventListener("keyup", handleEvents);
       canvas.addEventListener("mousedown", handleEvents);
       canvas.addEventListener("mousemove", handleEvents);
@@ -52,7 +56,7 @@ const Game: React.FC<{}> = () => {
       return (_: void) => {
         clearInterval(redrawInterval);
         window.removeEventListener("keydown", handleEvents);
-        window.removeEventListener("keypress", handleEvents);
+        window.removeEventListener("contextmenu", handleEvents);
         window.removeEventListener("keyup", handleEvents);
         canvas.removeEventListener("mousedown", handleEvents);
         canvas.removeEventListener("mousemove", handleEvents);

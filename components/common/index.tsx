@@ -153,3 +153,10 @@ export const CustomIcon = styled.div<{ size: number }>`
 export const Rotate = styled.span<{ r: number }>`
   transform: rotate(${props => props.r}deg);
 `
+
+export const Centered = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+`
