@@ -40,6 +40,7 @@ const GameLinksApp: React.FC<{}> = ({ }) => {
   let games = [
     <GameItem key="snake" name="snake" />,
     <GameItem key="pong" name="pong" />,
+    <GameItem key="tictactoe" name="tictactoe" />,
     <GameItem key="chess" name="chess" />
   ];
 
