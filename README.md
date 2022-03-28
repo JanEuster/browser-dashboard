@@ -4,9 +4,11 @@
 
 ## features to be added
 
-- [ ] notes
-- [ ] site links
-- [ ] server monitoring
-- [ ] server links
-- [ ] server controls
-- [ ] calender
+✅ notes <br/>
+✅ weather overview <br/>
+✅ site links <br/>
+❌ games <br/>
+❌ server monitoring <br/>
+❌ server links <br/>
+❌ server controls <br/>
+❌ calender <br/>
