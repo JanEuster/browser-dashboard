@@ -83,7 +83,7 @@ class TicTacToeGame {
     for (let i = 0; i < this.SIZE; i++) {
       if (this.grid[i].every(e => e === this.grid[i][0]) && this.grid[i][0] !== SIDES.none) {
         this.winning = this.grid[i].map((e, j) => {
-          return [j, i]
+          return [i, j]
         });
         return true
       }
@@ -97,7 +97,7 @@ class TicTacToeGame {
       }
       if (row.every(e => e === row[0]) && row[0] !== SIDES.none) {
         this.winning = row.map((e, j) => {
-          return [i, j]
+          return [j, i]
         });
         return true
       }
