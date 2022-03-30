@@ -1,15 +1,15 @@
 
 class PongGame {
   FPS = 60;
-  COLUMNS = 50;
-  ROWS = 40;
+  COLUMNS = 44;
+  ROWS = 32;
   FIELD_SIZE = Math.round(window.innerHeight / this.COLUMNS * 0.8);
   RADIUS = this.FIELD_SIZE / 2;
   WIDTH = this.COLUMNS * this.FIELD_SIZE;
   HEIGHT = this.ROWS * this.FIELD_SIZE;
   CENTER_COLUMN = Math.round(this.COLUMNS / 2) * this.FIELD_SIZE
-  PLAYER_SPEED = 0.4;
-  BALL_SPEED = 1.65;
+  PLAYER_SPEED = 0.42;
+  BALL_SPEED = 0.6;
   p1Y: number;
   p2Y: number;
   p1Move: number;
@@ -66,22 +66,23 @@ class PongGame {
 
   reset() {
     this.ballPos = { x: this.COLUMNS / 2, y: this.ROWS / 2 }
-    this.ballVel = { x: 0.5, y: 0 }
+    this.resetBallVelocity();
+  }
+
+  resetBallVelocity() {
+    let dir = 1;
+    if (Math.random() > 0.5) dir = -1
+
+    let fromMiddle = Math.random() * 0.5
+    this.ballVel.y = fromMiddle * 0.6;
+    this.ballVel.x = (1 - fromMiddle) * 0.6 * this.BALL_SPEED * dir;
   }
 
   setBallVelocity(playerY: number, dir: number) {
-    let ballOffset = (this.ballPos.y - playerY) / 4;
-    let fromMiddle = Math.abs(ballOffset - 0.5);
-    if (ballOffset < 0.5) {
-      this.ballVel.x = (1 - fromMiddle) * dir * this.BALL_SPEED;
-      this.ballVel.y = -fromMiddle;
-    } else if (ballOffset > 0.5) {
-      this.ballVel.x = (1 - fromMiddle) * dir * this.BALL_SPEED;
-      this.ballVel.y = fromMiddle;
-    } else {
-      this.ballVel.x = 1 * dir * this.BALL_SPEED;
-      this.ballVel.y = 0;
-    }
+    let ballOffset = (this.ballPos.y - playerY) / 5;
+    let fromMiddle = ballOffset - 0.5;
+    this.ballVel.x = (1 - Math.abs(fromMiddle)) * dir * this.BALL_SPEED;
+    this.ballVel.y = fromMiddle * this.BALL_SPEED;
   }
 
 
@@ -102,16 +103,16 @@ class PongGame {
     this.p2Y += this.p2Move;
     this.clampPlayersY()
 
-    if (this.ballPos.x < 3 && this.ballPos.y + 1 > this.p1Y && this.ballPos.y < this.p1Y + 5) {
+    if ((this.ballPos.x < 3 && this.ballPos.x > 2) && this.ballPos.y + 1 > this.p1Y && this.ballPos.y < this.p1Y + 5) {
       this.setBallVelocity(this.p1Y, 1);
-    } else if (this.ballPos.x > this.COLUMNS - 4 && this.ballPos.y + 1 > this.p2Y && this.ballPos.y < this.p2Y + 5) {
+    } else if ((this.ballPos.x > this.COLUMNS - 4 && this.ballPos.x < this.COLUMNS - 3) && this.ballPos.y + 1 > this.p2Y && this.ballPos.y < this.p2Y + 5) {
       this.setBallVelocity(this.p2Y, -1);
-    } else if (this.ballPos.y < 1 || this.ballPos.y > this.ROWS - 2) {
+    } else if (this.ballPos.y <= 1 || this.ballPos.y >= this.ROWS - 2) {
       this.ballVel.y *= -1;
     }
 
-    this.ballPos.x += this.ballVel.x * 0.5;
-    this.ballPos.y += this.ballVel.y * 0.5;
+    this.ballPos.x += this.ballVel.x;
+    this.ballPos.y += this.ballVel.y;
 
 
     if (this.ballPos.x < 0 || this.ballPos.y < 0) {
@@ -151,11 +152,11 @@ class PongGame {
     ctx.rect(this.ballPos.x * this.FIELD_SIZE, this.ballPos.y * this.FIELD_SIZE, this.FIELD_SIZE, this.FIELD_SIZE);
 
     // draw score
-    ctx.font = "80px Arial";
+    ctx.font = `${3 * this.FIELD_SIZE}px Arial`;
     ctx.textAlign = "right"
-    ctx.fillText(String(this.score.p1), this.CENTER_COLUMN - this.FIELD_SIZE, 6 * this.FIELD_SIZE);
+    ctx.fillText(String(this.score.p1), this.CENTER_COLUMN - this.FIELD_SIZE, 4 * this.FIELD_SIZE);
     ctx.textAlign = "left"
-    ctx.fillText(String(this.score.p2), this.CENTER_COLUMN + 2 * this.FIELD_SIZE, 6 * this.FIELD_SIZE);
+    ctx.fillText(String(this.score.p2), this.CENTER_COLUMN + 2 * this.FIELD_SIZE, 4 * this.FIELD_SIZE);
 
     ctx.closePath()
     ctx.fill()
