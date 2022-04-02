@@ -5,6 +5,7 @@ import { Centered } from "../../components/common";
 import GameType from "../../components/Games";
 import PongGame from "../../components/Games/Pong";
 import TicTacToeGame from "../../components/Games/TicTacToe";
+import TowersOfHanoiGame from "../../components/Games/TowersOfHanoi";
 
 const Game: React.FC<{}> = () => {
   const router = useRouter();
@@ -21,6 +22,9 @@ const Game: React.FC<{}> = () => {
       break
     case "tictactoe":
       game = new TicTacToeGame();
+      break
+    case "towersofhanoi":
+      game = new TowersOfHanoiGame();
       break
     default:
       isValidURL = false;
