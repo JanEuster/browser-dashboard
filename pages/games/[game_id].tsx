@@ -34,13 +34,15 @@ const Game: React.FC<{}> = () => {
   const canvasRef = useRef(null);
 
 
-  if (isValidURL) {
-    useEffect(() => {
+  useEffect(() => {
+    if (isValidURL && game && canvasRef.current) {
       const canvas: HTMLCanvasElement = canvasRef.current;
       const ctx = canvas.getContext("2d");
       const redrawInterval = setInterval(() => {
-        game?.update();
-        game?.draw(ctx);
+        if (ctx) {
+          game?.update();
+          game?.draw(ctx);
+        }
       }, 1000 / game.FPS)
 
       const handleEvents = (e: MouseEvent | KeyboardEvent) => {
@@ -67,14 +69,12 @@ const Game: React.FC<{}> = () => {
         canvas.removeEventListener("mouseup", handleEvents);
 
       }
-    }, [])
-  } else {
-    useEffect(() => { })
-  }
+    }
+  }, [game, isValidURL])
   return (
     <Centered>
       {
-        isValidURL ?
+        isValidURL && game ?
           <canvas ref={canvasRef} width={game.WIDTH} height={game.HEIGHT}></canvas>
           :
           <h1>404 Game Not Found</h1>

@@ -24,12 +24,12 @@ const LinkItem: React.FC<{ title: string, src: string }> = ({ title, src }) => {
 const WebLinksApp: React.FC<{ shrink?: number }> = ({ shrink }) => {
   return (
     <LinkApp icon={<ArrowSquareOut size={24} weight="bold" />} title="Links">
-      <LinkItem title="DuckDuckGo" src="https://www.duckduckgo.com/" />
-      <LinkItem title="Youtube" src="https://www.youtube.com/" />
-      <LinkItem title="Twitch" src="https://www.twitch.tv/" />
-      <LinkItem title="Github" src="https://github.com/" />
-      <LinkItem title="Steam" src="https://www.steampowered.com/" />
-      <LinkItem title="Blender" src="https://www.blender.org/" />
+      <LinkItem key="ddg" title="DuckDuckGo" src="https://www.duckduckgo.com/" />
+      <LinkItem key="yt" title="Youtube" src="https://www.youtube.com/" />
+      <LinkItem key="ttv" title="Twitch" src="https://www.twitch.tv/" />
+      <LinkItem key="gh" title="Github" src="https://github.com/" />
+      <LinkItem key="steam" title="Steam" src="https://www.steampowered.com/" />
+      <LinkItem key="blend" title="Blender" src="https://www.blender.org/" />
     </LinkApp>
   )
 }
