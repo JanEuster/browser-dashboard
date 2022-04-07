@@ -11,7 +11,7 @@ class TowersOfHanoiGame {
   n: number;
   rods: number[][];
   baseWidth: number;
-  moving_disk: number;
+  moving_disk: number | undefined;
   solveRods: number[][];
   solution_steps: typeof this.solveRods[];
   constructor() {
@@ -47,10 +47,12 @@ class TowersOfHanoiGame {
 
 
     let item = this.solveRods[start_rod].pop();
-    this.solveRods[goal_rod].push(item);
+    if (item) {
+      this.solveRods[goal_rod].push(item);
 
-    this.solution_steps.push([...this.solveRods]);
-    console.log(this.solveRods)
+      this.solution_steps.push([...this.solveRods]);
+      console.log(this.solveRods)
+    }
 
     if (level + 1 < this.n) {
       this.solver(level + 1, non_goal_rod, start_rod, goal_rod);
@@ -65,7 +67,7 @@ class TowersOfHanoiGame {
       if (e.type === "mousedown") {
         if (this.moving_disk == -1 && this.rods[rodsIndex].length > 0) {
           this.moving_disk = this.rods[rodsIndex].pop()
-        } else if (this.moving_disk >= 0) {
+        } else if (this.moving_disk && this.moving_disk >= 0) {
           if (this.rods[rodsIndex].length == 0 || this.rods[rodsIndex][this.rods[rodsIndex].length - 1] > this.moving_disk) {
             this.rods[rodsIndex].push(this.moving_disk);
             this.moving_disk = -1;
