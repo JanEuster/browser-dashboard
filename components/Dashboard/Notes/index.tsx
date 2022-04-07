@@ -46,8 +46,6 @@ const NoteView: React.FC<{ content: string; setContent: Function }> = (
 const NotesApp: React.FC<IFlex> = ({ basis, shrink, grow }) => {
   const [notes, setNotes] = useState<INote[]>([]);
 
-  const titleInputRef = useRef();
-
   const [noteView, setNoteView] = useState<INote | undefined>(undefined);
 
   function changeTitle(title: string) {
@@ -140,7 +138,6 @@ const NotesApp: React.FC<IFlex> = ({ basis, shrink, grow }) => {
             <NoteIcon size={40} weight="bold" />
             <NoteEditableTitle
               type="text"
-              ref={titleInputRef}
               placeholder="New Note"
               value={noteView.title}
               onChange={(e) => changeTitle(e.target.value)}
