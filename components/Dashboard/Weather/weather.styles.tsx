@@ -99,3 +99,24 @@ export const LocationText = styled.pre`
   right: 0;
   padding: 0.1rem 0.35rem;
 `
+
+
+export const SetAPIKey = styled.div<{ show: Boolean }>`
+  width: 100%;
+  height: 100%;
+  display: ${props => props.show ? "flex" : "none"};
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  * {
+    margin: 3px;
+  }
+  input {
+    display: block;
+  }
+  button {
+    height: 60px;
+    width: 80px;
+  }
+`

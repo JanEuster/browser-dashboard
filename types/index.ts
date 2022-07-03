@@ -1,4 +1,5 @@
 import { AppProps } from "next/app";
+import { ReactElement, SetStateAction, useState } from "react";
 
 export interface ITheme {
   theme: string;
@@ -68,4 +69,20 @@ export type WeatherDataCurrent = {
   id: number,
   name: number,
   cod: number,
+}
+
+export type WeatherProp = {
+  currentData: WeatherDataCurrent,
+  setAPIKey: React.Dispatch<React.SetStateAction<string | null>>
+}
+
+export interface AdditionalWeather {
+  dateTaken: Date;
+  sunriseTime: Date;
+  sunsetTime: Date;
+  beforeSunrise: Boolean;
+  afterSunset: Boolean;
+  isDaylight: Boolean;
+  weatherMainIcon: ReactElement<any, any>;
+  windDirection: string
 }
