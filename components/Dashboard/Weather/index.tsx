@@ -183,7 +183,7 @@ const WeatherSummaryApp: React.FC<{}> = ({ }) => {
       <SetAPIKey show={!currentWeather}>
         Insert OpenWeather Current Weather Data API Key
         <input ref={inputRef} type="text" name="api key" />
-        <button onClick={() => { if (inputRef.current) setOpenWeatherKey(inputRef.current.value ?? ""); }}>Show Weather Data</button>
+        <button onClick={() => { if (inputRef.current) localStorage.setItem("openweather_key", inputRef.current.value ?? ""); window.location.reload() }}>Show Weather Data</button>
       </SetAPIKey>
 
       {currentWeather ?
