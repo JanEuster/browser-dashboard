@@ -3,6 +3,7 @@ import WebLinksApp from "./WebLinks"
 import WeatherSummaryApp from "./Weather"
 import { VStack100, HStack100, SpacerV, VStack, SpacerH, AppContainerVH, AppContainer } from "../common";
 import { WeatherDataCurrent, WeatherProp } from "../../types";
+import ConverterApp from "./Converter";
 
 const Dashboard: React.FC<{}> = ({ }) => {
   return (
@@ -24,8 +25,8 @@ const Dashboard: React.FC<{}> = ({ }) => {
 
         <SpacerH />
 
-        <VStack width="1000px" shrink={0}>
-          <AppContainerVH />
+        <VStack width="400px" shrink={0}>
+          <ConverterApp basis={65} />
           <SpacerV />
           <AppContainerVH />
         </VStack>
