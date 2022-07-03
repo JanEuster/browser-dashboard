@@ -2,16 +2,16 @@ import NotesApp from "./Notes";
 import WebLinksApp from "./WebLinks"
 import WeatherSummaryApp from "./Weather"
 import { VStack100, HStack100, SpacerV, VStack, SpacerH, AppContainerVH, AppContainer } from "../common";
-import { WeatherDataCurrent } from "../../types";
+import { WeatherDataCurrent, WeatherProp } from "../../types";
 
-const Dashboard: React.FC<{ currentWeather: WeatherDataCurrent }> = ({ currentWeather }) => {
+const Dashboard: React.FC<{}> = ({ }) => {
   return (
     <VStack100>
       <HStack100>
         <VStack width="375px" shrink={0} >
           <NotesApp basis={250} shrink={1} />
           <SpacerV />
-          <WeatherSummaryApp currentWeather={currentWeather} />
+          <WeatherSummaryApp />
         </VStack>
 
         <SpacerH />

@@ -1,15 +1,12 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import Image from "next/image";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
-import { AppContainer, AppContainerVH, SpacerV, SpacerH, HStack, VStack, HStack100, VStack100 } from "../components/common";
+import React, { useEffect, useState } from "react";
 import Dashboard from "../components/Dashboard";
 import styles from "../styles/Home.module.css";
-import { HomeProps, WeatherDataCurrent } from "../types";
-import ThemeButton from "./../components/ThemeButton/index";
+import { WeatherDataCurrent } from "../types";
 
-const Home: NextPage<{ theme: string, currentWeather: WeatherDataCurrent }> = ({ theme, currentWeather }) => {
+const Home: NextPage<{ theme: string }> = ({ theme }) => {
   const router = useRouter();
 
 
@@ -23,6 +20,8 @@ const Home: NextPage<{ theme: string, currentWeather: WeatherDataCurrent }> = ({
     return () => clearInterval(refreshInterval)
   }, [])
 
+
+
   return (
     <div className={styles.container}>
       <Head>
@@ -32,7 +31,7 @@ const Home: NextPage<{ theme: string, currentWeather: WeatherDataCurrent }> = ({
       </Head>
 
       <main className={styles.main}>
-        <Dashboard currentWeather={currentWeather} />
+        <Dashboard />
       </main>
 
       <footer className={styles.footer}></footer>
@@ -42,21 +41,10 @@ const Home: NextPage<{ theme: string, currentWeather: WeatherDataCurrent }> = ({
 
 
 
-export async function getServerSideProps({ }): Promise<{ props: { currentWeather: WeatherDataCurrent } }> {
-  // get current weather data
-  let weatherRes = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=52.51637&lon=13.37849&appid=${process.env.OPENWEATHER_APP_ID}&units=metric`);
-  let weatherData = await weatherRes.json();
-  // set weatherData city because the openweathermap api city is jsut the location name of the weather station
-  let locationRes = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=52.51637&lon=13.37849`);
-  let locationData = await locationRes.json()
-  // weatherData.name = `${weatherData.name}, ${locationData.address.borough}, ${locationData.address.city}, ${locationData.address.country}`
-  weatherData.name = `${locationData.address.city}, ${locationData.address.country}`
-
-
+export async function getServerSideProps({ }): Promise<{ props: {} }> {
 
   return {
     props: {
-      currentWeather: weatherData,
     },
 
   }
